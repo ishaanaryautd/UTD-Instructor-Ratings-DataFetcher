@@ -23,7 +23,7 @@ app.get('/getData', function(req, res1, next) {     // Getting the data from the
 		if(error) { return  console.error('There was an error!'); }
 
 		var $ = cheerio.load(body);
-		var htmas = $("div.not-found-box").next().html();
+		var htmas = $("div.xx-box").next().html(); //modified css selector to prevent unauthorised scraping 
 		if(htmas.includes('Your search')) // If the professor is not found return ERROR
 		{
 			console.log("ERROR")
@@ -37,7 +37,7 @@ app.get('/getData', function(req, res1, next) {     // Getting the data from the
 		var text = $(this).text();
 		var link = $(this).attr('href');
 
-			if(link && link.match(/ShowRatings/)){              
+			if(link && link.match(/xyratings/)){ //modified css selector to prevent unauthorised scraping 
 			
 				link = url+link; // If link found on the search page matches the ShowRatings attribute which is typical for professor rating page urls
 				links.push( link ); // Creating an array of links which match the showRatings criterion
@@ -50,14 +50,15 @@ app.get('/getData', function(req, res1, next) {     // Getting the data from the
 							
 							var $ = cheerio.load(body);
 
-							if(($("[class='breakdown-section difficulty'] .grade").html()))
+							if(($("[class='css selector1'] .grade").html())) //modified css selector to prevent unauthorised scraping 
 							{
-								difficulty = ($("[class='breakdown-section difficulty'] .grade").html()).replace(/\s+/g, ""); // Extracting difficulty
+								difficulty = ($("[class='css selector2'] .grade").html()).replace(/\s+/g, ""); // Extracting difficulty
 							}
 							else{difficulty = 'null'} // Otherwise null
-							if(($("[class='breakdown-section difficulty'] .grade").html()) )
+							if(($("[class='breakdown-section difficulty'] .grade").html()) ) //modified css selector to prevent unauthorised scraping 
 							{
-								overallQuality = $("[class='breakdown-container quality'] .grade").html().replace(/\s+/g, ""); // Extracting Quality
+								//modified css selector to prevent unauthorised scraping 
+								overallQuality = $("[class='css selector3'] .grade").html().replace(/\s+/g, ""); // Extracting Quality
 							}
 							else{overallQuality = 'null'}
 							console.log( difficulty + ".");
